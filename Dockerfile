@@ -37,9 +37,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application files
 COPY wifi_login_tool.py .
 COPY wifi_login_cli.py .
+COPY wifi_login_headless.py .
 
 # Make scripts executable
-RUN chmod +x wifi_login_tool.py wifi_login_cli.py
+RUN chmod +x wifi_login_tool.py wifi_login_cli.py wifi_login_headless.py
 
 # Create a non-root user
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app

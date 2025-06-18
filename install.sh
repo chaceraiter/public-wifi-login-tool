@@ -48,6 +48,7 @@ echo
 echo "Making scripts executable..."
 chmod +x wifi_login_tool.py
 chmod +x wifi_login_cli.py
+chmod +x wifi_login_headless.py
 
 echo "✓ Scripts made executable"
 
@@ -59,12 +60,60 @@ else
     echo "  You can still use the CLI version."
 fi
 
+# Create shortcuts
+echo
+echo "Creating shortcuts..."
+
+# Get current directory
+CURRENT_DIR=$(pwd)
+
+# Create desktop shortcut
+if [ -d "$HOME/Desktop" ]; then
+    cat > "$HOME/Desktop/WiFi Login Tool.desktop" << EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=WiFi Login Tool
+Comment=Access public WiFi login portals safely
+Exec=python3 "$CURRENT_DIR/wifi_login_tool.py"
+Icon=network-wireless
+Terminal=false
+Categories=Network;Utility;
+EOF
+    chmod +x "$HOME/Desktop/WiFi Login Tool.desktop"
+    echo "✓ Desktop shortcut created"
+else
+    echo "⚠ Desktop directory not found, skipping desktop shortcut"
+fi
+
+# Create local shortcut
+cat > "WiFi Login Tool.sh" << EOF
+#!/bin/bash
+cd "\$(dirname "\$0")"
+python3 wifi_login_tool.py
+EOF
+chmod +x "WiFi Login Tool.sh"
+echo "✓ Local shortcut created (WiFi Login Tool.sh)"
+
+# Create CLI shortcut
+cat > "WiFi Login CLI.sh" << EOF
+#!/bin/bash
+cd "\$(dirname "\$0")"
+python3 wifi_login_cli.py
+EOF
+chmod +x "WiFi Login CLI.sh"
+echo "✓ CLI shortcut created (WiFi Login CLI.sh)"
+
 echo
 echo "Installation complete!"
 echo
 echo "Usage:"
 echo "  GUI version: python3 wifi_login_tool.py"
 echo "  CLI version: python3 wifi_login_cli.py"
+echo "  Or double-click the shortcuts:"
+echo "    - WiFi Login Tool.sh (GUI)"
+echo "    - WiFi Login CLI.sh (CLI)"
+echo "    - Desktop shortcut (if created)"
 echo
 echo "For more information, see README.md"
 echo

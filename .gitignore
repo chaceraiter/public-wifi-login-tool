@@ -63,4 +63,18 @@ chromedriver.exe
 
 # Screenshots from headless mode
 screenshot_*.png
-portal_screenshot_*.png 
+portal_screenshot_*.png
+
+# Test files
+test_logs/
+test_*.log
+mock_portal_*.log
+
+# Testing environment (not distributed)
+testing/
+
+# Shortcuts (created by install scripts)
+WiFi Login Tool.sh
+WiFi Login CLI.sh
+WiFi Login Tool.bat
+WiFi Login CLI.bat 

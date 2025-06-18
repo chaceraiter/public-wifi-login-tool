@@ -54,12 +54,47 @@ if errorlevel 1 (
     echo ✓ Chrome detected (for GUI version)
 )
 
+REM Create shortcuts
+echo.
+echo Creating shortcuts...
+
+REM Get current directory
+set CURRENT_DIR=%CD%
+
+REM Create desktop shortcut
+if exist "%USERPROFILE%\Desktop" (
+    echo @echo off > "%USERPROFILE%\Desktop\WiFi Login Tool.bat"
+    echo cd /d "%CURRENT_DIR%" >> "%USERPROFILE%\Desktop\WiFi Login Tool.bat"
+    echo python wifi_login_tool.py >> "%USERPROFILE%\Desktop\WiFi Login Tool.bat"
+    echo pause >> "%USERPROFILE%\Desktop\WiFi Login Tool.bat"
+    echo ✓ Desktop shortcut created
+) else (
+    echo ⚠ Desktop directory not found, skipping desktop shortcut
+)
+
+REM Create local shortcuts
+echo @echo off > "WiFi Login Tool.bat"
+echo cd /d "%%~dp0" >> "WiFi Login Tool.bat"
+echo python wifi_login_tool.py >> "WiFi Login Tool.bat"
+echo pause >> "WiFi Login Tool.bat"
+echo ✓ Local shortcut created (WiFi Login Tool.bat)
+
+echo @echo off > "WiFi Login CLI.bat"
+echo cd /d "%%~dp0" >> "WiFi Login CLI.bat"
+echo python wifi_login_cli.py >> "WiFi Login CLI.bat"
+echo pause >> "WiFi Login CLI.bat"
+echo ✓ CLI shortcut created (WiFi Login CLI.bat)
+
 echo.
 echo Installation complete!
 echo.
 echo Usage:
 echo   GUI version: python wifi_login_tool.py
 echo   CLI version: python wifi_login_cli.py
+echo   Or double-click the shortcuts:
+echo     - WiFi Login Tool.bat (GUI)
+echo     - WiFi Login CLI.bat (CLI)
+echo     - Desktop shortcut (if created)
 echo.
 echo For more information, see README.md
 echo.

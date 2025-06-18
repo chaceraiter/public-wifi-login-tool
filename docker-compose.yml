@@ -41,7 +41,7 @@ services:
     network_mode: host
     volumes:
       - ./logs:/app/logs
-    command: ["python", "wifi_login_cli.py", "--headless"]
+    command: ["python", "wifi_login_headless.py"]
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
