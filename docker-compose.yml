@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # CLI version - simple and fast
+  wifi-login-cli:
+    build: .
+    container_name: wifi-login-cli
+    network_mode: host  # Use host networking for better network access
+    volumes:
+      - ./logs:/app/logs  # Optional: mount logs directory
+    command: ["python", "wifi_login_cli.py"]
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  # GUI version with VNC support
+  wifi-login-gui:
+    build: .
+    container_name: wifi-login-gui
+    network_mode: host
+    volumes:
+      - ./logs:/app/logs
+    command: >
+      sh -c "
+        Xvfb :99 -screen 0 1024x768x24 &
+        fluxbox &
+        x11vnc -display :99 -nopw -listen localhost -xkb -ncache 10 -ncache_cr -forever &
+        python wifi_login_tool.py
+      "
+    restart: unless-stopped
+    environment:
+      - DISPLAY=:99
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "5900:5900"  # VNC port for GUI access
+
+  # Alternative: Headless browser version
+  wifi-login-headless:
+    build: .
+    container_name: wifi-login-headless
+    network_mode: host
+    volumes:
+      - ./logs:/app/logs
+    command: ["python", "wifi_login_cli.py", "--headless"]
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DISPLAY=:99 
