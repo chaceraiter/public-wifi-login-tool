@@ -1,115 +1,158 @@
-# Security Considerations
+# Security Policy
 
-This document outlines the security measures and considerations for the Public WiFi Login Tool.
+## Supported Versions
 
-## Security Measures Implemented
+Only the latest version is currently supported with security updates. We recommend always using the most recent release.
 
-### 1. URL Validation
-- All user-provided URLs are validated before processing
-- Only HTTP and HTTPS schemes are allowed
-- Malformed URLs are rejected
+## Reporting a Vulnerability
 
-### 2. Controlled Browser Environment
-- Chrome browser runs with limited privileges
-- Extensions and plugins are disabled
-- Web security is maintained (removed dangerous `--disable-web-security` flag)
-- Uses safer alternatives for handling insecure content
+If you discover a security vulnerability, please report it by:
 
-### 3. Input Sanitization
-- User inputs are stripped of whitespace
-- Basic validation prevents malicious URL injection
-- Error handling prevents crashes from malformed input
+1. **DO NOT** create a public GitHub issue
+2. Email: [INSERT_SECURITY_EMAIL]
+3. Include detailed steps to reproduce
+4. If possible, include proof of concept code
 
-### 4. Container Security (Docker)
-- Runs as non-root user
-- No persistent storage of sensitive data
-- Network isolation through Docker
-- Temporary files are cleaned up
+We'll acknowledge receipt within 24 hours and provide a detailed response within 72 hours.
 
-### 5. File Protection
-- `.gitignore` prevents accidental commit of sensitive files
-- Screenshots and logs are excluded from version control
-- No hardcoded credentials or secrets
+## Security Considerations
 
-## Security Risks and Mitigations
+### Data Privacy
 
-### ⚠️ Known Risks
+1. **No Data Collection**
+   - The tool does not collect or transmit any user data
+   - No analytics or telemetry
+   - No remote logging
 
-1. **Public WiFi Security**
-   - **Risk**: Man-in-the-middle attacks, fake portals
-   - **Mitigation**: Clear warnings, only use on trusted networks
+2. **Local Storage**
+   - Configuration files stored locally only
+   - Credentials in headless mode stored in plain text (user's responsibility)
+   - No browser data persistence between sessions
 
-2. **HTTP vs HTTPS**
-   - **Risk**: Unencrypted traffic on public networks
-   - **Mitigation**: Tool supports both, user decides based on trust
+3. **Network Access**
+   - Only connects to user-specified portals
+   - Uses standard HTTP(S) requests for detection
+   - No background network activity
+
+### Browser Security
+
+1. **Isolation**
+   - Each session uses a fresh browser instance
+   - No persistent cookies or cache
+   - No extension loading
+   - Sandboxed execution
+
+2. **Portal Access**
+   - Only accesses known portal detection URLs
+   - User must manually approve unknown portals
+   - Clear warning when accessing HTTP portals
+
+### System Security
+
+1. **Minimal Permissions**
+   - No admin privileges required
+   - No system modifications
+   - No registry changes (Windows)
+   - No system service installation
+
+2. **Installation Security**
+   - Portable installation (no system integration)
+   - All files contained in one directory
+   - Clean uninstallation (just delete directory)
+
+3. **Dependencies**
+   - All dependencies pinned to specific versions
+   - No external package downloads during runtime
+   - Self-contained Python environment
+
+### Corporate Environment
+
+1. **Network Policies**
+   - Compatible with corporate proxies
+   - No bypass of network security
+   - Standard browser-based portal access
+
+2. **Antivirus Compatibility**
+   - No system hooks
+   - No binary modifications
+   - Clean Python source code
+   - Official Python distribution
+
+### Known Limitations
+
+1. **Plain Text Credentials**
+   - Headless mode configuration stores credentials in plain text
+   - Users should secure access to configuration files
+   - Not recommended for high-security environments
+
+2. **HTTP Portal Access**
+   - Some portals require HTTP access
+   - Clear warnings provided
+   - User must acknowledge risks
 
 3. **Browser Automation**
-   - **Risk**: Potential for malicious websites to exploit automation
-   - **Mitigation**: Controlled environment, limited permissions
+   - Uses Selenium WebDriver
+   - May be flagged by strict security policies
+   - Alternative manual mode available
 
-4. **Network Access**
-   - **Risk**: Tool needs network access to detect portals
-   - **Mitigation**: Only accesses known portal detection URLs
+## Best Practices
 
-### ✅ Security Best Practices
+### For Users
 
-1. **Principle of Least Privilege**
-   - Tool only requests necessary permissions
-   - Browser runs with minimal privileges
+1. **Configuration Security**
+   - Keep configuration files private
+   - Don't share headless credentials
+   - Use strong portal passwords
+   - Regular credential rotation
 
-2. **Transparency**
-   - All actions are logged
-   - Users can see what the tool is doing
-   - Clear warnings about security implications
+2. **Network Safety**
+   - Only use on trusted networks
+   - Verify portal URLs
+   - Use VPN when possible
+   - Don't enter sensitive data
 
-3. **Isolation**
-   - Docker containers provide isolation
-   - No access to host system beyond network
+3. **Installation**
+   - Download from official releases only
+   - Verify checksums if provided
+   - Keep tool updated
+   - Review configuration files
 
-4. **Validation**
-   - All inputs are validated
-   - URLs are checked before processing
-   - Error handling prevents crashes
+### For Administrators
 
-## Usage Recommendations
+1. **Deployment**
+   - Review source code before deployment
+   - Test in isolated environment
+   - Configure corporate proxy settings
+   - Document approved usage
 
-### ✅ Safe Usage
-- Use on trusted networks (airports, hospitals, known businesses)
-- Verify portal URLs before entering credentials
-- Use VPN for additional security when possible
-- Don't enter sensitive information (banking, passwords)
+2. **Monitoring**
+   - Monitor for unusual portal access
+   - Review logs periodically
+   - Track configuration changes
+   - Update allowed portal lists
 
-### ❌ Unsafe Usage
-- Using on unknown/untrusted networks
-- Entering sensitive credentials without verification
-- Ignoring security warnings
-- Using for malicious purposes
+3. **Policy**
+   - Define acceptable use policy
+   - Document security exceptions
+   - Maintain portal URL whitelist
+   - Regular security reviews
 
-## Reporting Security Issues
+## GitHub Security
 
-If you discover a security vulnerability:
+1. **Repository Settings**
+   - No sensitive data in repository
+   - Branch protection enabled
+   - Required reviews for changes
+   - Automated security scanning
 
-1. **Do not** create a public issue
-2. **Do** contact the maintainer privately
-3. **Include** detailed steps to reproduce
-4. **Provide** any relevant logs or error messages
+2. **Release Process**
+   - Signed commits
+   - Release checksums provided
+   - Clear changelog
+   - Security review before release
 
-## Security Updates
-
-This tool is designed for educational and personal use. Security updates will be provided as needed, but users should:
-
-- Keep the tool updated
-- Monitor for security advisories
-- Use the latest version of dependencies
-- Follow security best practices
-
-## Disclaimer
-
-This tool is provided as-is for educational and personal use. Users are responsible for:
-
-- Understanding the security implications
-- Using the tool only on trusted networks
-- Following security best practices
-- Complying with local laws and network policies
-
-The authors are not responsible for any security incidents resulting from misuse of this tool. 
+3. **Issue Tracking**
+   - Security issues privately reported
+   - No sensitive data in issues
+   - Clear security policy
+   - Responsible disclosure 

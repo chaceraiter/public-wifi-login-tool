@@ -19,43 +19,119 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
-# Virtual environments
+# Virtual Environment
 venv/
-env/
 ENV/
-env.bak/
-venv.bak/
+env/
+.env
 
 # IDE
-.vscode/
 .idea/
+.vscode/
 *.swp
 *.swo
 *~
 
-# Logs
+# Logs and Data
 *.log
 logs/
-portal_screenshot_*.png
+wifi_login.log
+*.pcap
+*.cap
+*.dump
+screenshots/
+*.png
+*.jpg
+*.jpeg
 
-# Temporary files
-*.tmp
-*.temp
-.DS_Store
+# Config files with sensitive data
+config/*.json
+!config/*.example.json
+*.ini
+*.conf
+.env*
+credentials.txt
+secrets.yaml
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.pfx
+
+# Windows
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
 
 # Docker
+.docker/
+docker-compose.override.yml
+*.env
 .dockerignore
+
+# Build and Dist
+dist/
+build/
+*.exe
+*.msi
+*.zip
+*.tar.gz
+*.rar
+*.7z
+wifi-login-tool-portable/
+wifi-login-tool-portable.zip
+
+# Testing and Coverage
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+.mypy_cache/
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
 
 # Security
 *.key
 *.pem
-*.crt
-*.p12
-secrets.txt
-.env
+*.pub
+*.gpg
+*.asc
+*.sig
+*.sign
+.gnupg/
+.ssh/
+
+# Debug
+debug/
+*.debug
+debug.log
+error.log
+crash-*
 
 # Chrome driver
 chromedriver
@@ -77,4 +153,22 @@ testing/
 WiFi Login Tool.sh
 WiFi Login CLI.sh
 WiFi Login Tool.bat
-WiFi Login CLI.bat 
+WiFi Login CLI.bat
+
+# New shortcut files (created by separated installers)
+WiFi Login Tool (GUI).bat
+WiFi Login Tool (CLI).bat
+WiFi Login Tool (Headless).bat
+WiFi Login Tool (GUI).sh
+WiFi Login Tool (CLI).sh
+WiFi Login Tool (Headless).sh
+
+# Portable Python files (not distributed in source)
+windows-install/portable/python/
+windows-install/portable/requirements/
+windows-install/portable/chrome/
+
+# Desktop shortcuts (created by installers)
+Desktop/WiFi Login Tool*.bat
+Desktop/WiFi Login Tool*.desktop
+Desktop/WiFi Login Tool*.sh 

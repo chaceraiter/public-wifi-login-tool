@@ -1,0 +1,20 @@
+{
+    "check_interval": 30,
+    "max_attempts": 3,
+    "portal_urls": [
+        "http://portal.example.com",
+        "http://wifi.example.org/login"
+    ],
+    "auto_login": {
+        "enabled": true,
+        "selectors": {
+            "username": "#username-field",
+            "password": "#password-field",
+            "submit": "#login-button"
+        },
+        "credentials": {
+            "username": "example_user",
+            "password": "example_password"
+        }
+    }
+} 
